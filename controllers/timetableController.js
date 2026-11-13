@@ -17,11 +17,11 @@ exports.createTimetable = async (req, res) => {
     for (const period of periods) {
       const teacher = await Teacher.findOne({
         _id: period.teacher,
-        school: school._id
+        school: school._id,
       });
       if (!teacher) {
         return res.status(404).json({
-          error: `Teacher with ID ${period.teacher} not found in this school`
+          error: `Teacher with ID ${period.teacher} not found in this school`,
         });
       }
     }
@@ -35,7 +35,7 @@ exports.createTimetable = async (req, res) => {
 
     if (existingTimetable) {
       return res.status(409).json({
-        error: "Timetable already exists for this class and day"
+        error: "Timetable already exists for this class and day",
       });
     }
 
@@ -129,11 +129,11 @@ exports.updateTimetable = async (req, res) => {
       for (const period of periods) {
         const teacher = await Teacher.findOne({
           _id: period.teacher,
-          school: timetable.school
+          school: timetable.school,
         });
         if (!teacher) {
           return res.status(404).json({
-            error: `Teacher with ID ${period.teacher} not found in this school`
+            error: `Teacher with ID ${period.teacher} not found in this school`,
           });
         }
       }
@@ -147,7 +147,7 @@ exports.updateTimetable = async (req, res) => {
         ...(periods && { periods }),
         updatedAt: Date.now(),
       },
-      { new: true }
+      { new: true },
     ).populate("periods.teacher", "name email");
 
     res.status(200).json({
@@ -190,7 +190,7 @@ exports.getAvailableTeachers = async (req, res) => {
 
     const teachers = await Teacher.find({
       school: school._id,
-      status: "active"
+      status: "active",
     }).select("name email subjects");
 
     res.status(200).json({

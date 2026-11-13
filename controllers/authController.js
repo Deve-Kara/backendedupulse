@@ -95,7 +95,7 @@ exports.login = async (req, res) => {
     });
     res.json({ token: token });
   } catch (err) {
-    res.status(400).json({ error: err.message || "Login faileds" });
+    res.status(400).json({ error: err.message || "Login failed" });
   }
 };
 

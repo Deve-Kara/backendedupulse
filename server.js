@@ -13,17 +13,15 @@ const teacherRoutes = require("./routes/teacherRoutes");
 const assignmentRoutes = require("./routes/assignmentsRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
 const timetableRoutes = require("./routes/timetableRoutes");
-const dns = require("node:dns/promises");
-
-dns.setServers(["1.1.1.1", "8.8.8.8"]); // Cloudflare + Google DNS
 
 // Middlewares
-app.use(
-  cors({
-    origin: "https://edupulse-ed.vercel.app",
-    credentials: true,
-  }),
-);
+// app.use(
+//   cors({
+//     origin: "https://edupulse-ed.vercel.app http://localhost:5000/",
+//     credentials: true,
+//   }),
+// );
+app.use(cors());
 app.use(express.json());
 
 function checkToken(req, res, next) {
